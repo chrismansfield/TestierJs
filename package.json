@@ -1,0 +1,11 @@
+{
+  "name": "testier",
+  "version": "0.0.0",
+  "description": "Making your tests testier!",
+  "main": "index.js",
+  "scripts": {
+    
+  },
+  "author": "Christoffer Mansfield",
+  "license": "ISC"
+}
