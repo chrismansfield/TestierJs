@@ -4,14 +4,17 @@
   "description": "Making your tests testier!",
   "main": "index.js",
   "scripts": {
-    "lintinit": "eslint --init"
+    "test": "jest",
+    "test-watch": "jest --watch"
   },
   "author": "Christoffer Mansfield",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^4.6.1",    
-    "eslint-config-strict": "^14.0.0",
-    "eslint-plugin-filenames": "^1.2.0",
-    "jest": "^21.0.0"
+    "babel": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "eslint": "^4.6.1",
+    "jest": "^21.0.0",
+    "jest-babel": "^1.0.1",
+    "webpack": "^3.5.5"
   }
 }

@@ -1,7 +1,20 @@
 {
-    "extends": ["strict", "strict/browser"],
+    "extends": [
+        "eslint:recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
     "rules": {
         "no-var": "error",
-        "linebreak-style": "off"
+        "linebreak-style": "off",
+        "semi": "error",
+        "indent": [
+            "error",
+            4
+        ],
+        "padded-blocks": "off",
+        "class-methods-use-this": "off"
     }
 }
