@@ -1,0 +1,7 @@
+{
+    "extends": ["strict", "strict/browser"],
+    "rules": {
+        "no-var": "error",
+        "linebreak-style": "off"
+    }
+}
