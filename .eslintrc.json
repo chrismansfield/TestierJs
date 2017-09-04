@@ -10,6 +10,7 @@
         "no-var": "error",
         "linebreak-style": "off",
         "semi": "error",
+        "quotes": ["error", "single"],
         "indent": [
             "error",
             4

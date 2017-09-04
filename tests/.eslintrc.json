@@ -3,6 +3,7 @@
         "jest": true,
         "describe": true,
         "it": true,
-        "expect": true
+        "expect": true,
+        "afterEach": true
     }
 }
