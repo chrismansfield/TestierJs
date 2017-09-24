@@ -1,4 +1,4 @@
-import GeneratorFixture from './generator-fixture';
+import GeneratorFixture from './src/generator-fixture';
 
 export {
     GeneratorFixture
