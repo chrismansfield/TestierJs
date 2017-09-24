@@ -1,5 +1,5 @@
 import GeneratorFixture from './generator-fixture';
 
-export default {
+export {
     GeneratorFixture
 };
