@@ -26,7 +26,7 @@ export default class Builder {
     /**
      * Removes a defined property from the builder, causing it to be completely omitted from the build output
      * @param {string} property The property to remove from the builder
-     * @returns {Builder} The instance that the with() method was called on for chaining
+     * @returns {Builder} The instance that the without() method was called on for chaining
      */
     without(property) {
         const target = hasOwnProperty.call(this, property) ? property : `_${property}`;
