@@ -1,5 +1,3 @@
 import recordError from './recordError';
 
-export default {
-    recordError
-};
+export default recordError;

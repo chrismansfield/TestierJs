@@ -1,5 +1,3 @@
-
-
 export default class GeneratorFixture {
 
     constructor(generator) {
@@ -22,22 +20,16 @@ export default class GeneratorFixture {
     }
 
     forwardTo(target, value) {
-        if (!this._running) {
-            throw new Error('Cannot move forward before iteration has started. Make sure to call beginIterating before forwarding');
-        }
+        this._checkIfRunnable();
+        const targetIndex = typeof target === 'string' ? this.findStepIndexByName(target) : target;
 
-        const targetIndex = typeof (target) === 'string'
-            ? this.findStepIndexByName(target)
-            : target;
-
-        for (let i = this._currentIndex; i < targetIndex; i++) {
+        for (let i = this._currentIndex; i < targetIndex; i += 1) {
             const step = this._steps[this._currentIndex - 1] || {};
-            if (this._currentIndex == targetIndex - 1) {
+            if (this._currentIndex === targetIndex - 1) {
                 this._internalForwardOne(value || step.defaultValue);
             } else {
                 this._internalForwardOne(step.defaultValue);
             }
-
         }
     }
 
@@ -47,6 +39,10 @@ export default class GeneratorFixture {
 
     findStepByName(name) {
         return this._steps.find(step => step.name === name);
+    }
+
+    next(value) {
+        this._internalForwardOne(value);
     }
 
     beginIterating() {
@@ -59,9 +55,20 @@ export default class GeneratorFixture {
         this._internalForwardOne();
     }
 
+    _checkIfRunnable() {
+        if (!this._generator) {
+            throw new Error('Cannot begin iterating without a generator function. Provide one via the constructor or the setGenerator method');
+        }
+        if (!this._running) {
+            throw new Error('Cannot move forward before iteration has started. Make sure to call beginIterating before forwarding');
+        }
+    }
+
     _internalForwardOne(value) {
+        this._checkIfRunnable();
+
         const step = this._iterator.next(value);
-        this._currentIndex++;
+        this._currentIndex += 1;
         this.value = step.value;
         this.done = step.done;
     }

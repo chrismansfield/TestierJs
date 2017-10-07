@@ -1,5 +1,3 @@
 import forAll from './forAll';
 
-export {
-	forAll
-};
+export default forAll;

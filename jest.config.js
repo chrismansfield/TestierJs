@@ -1,4 +1,8 @@
 module.exports = {
     resetMocks: true,
-    rootDir: __dirname
+    rootDir: 'src',
+    moduleDirectories: [
+        'node_modules',
+        'src'
+      ],
 };
