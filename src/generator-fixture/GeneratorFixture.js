@@ -5,23 +5,25 @@ export default class GeneratorFixture {
         this.setGenerator(generator);
     }
 
-    setFlow(steps) {
-        if (this._running) {
-            throw new Error('Cannot set the GeneratorFixture flow once the fixture has begun iterating');
-        }
-        this._steps = steps;
-    }
-
     setGenerator(generator) {
         if (this._running) {
             throw new Error('Cannot set the GeneratorFixture generator once the fixture has begun iterating');
         }
         this._generator = generator;
+        return this;
+    }
+
+    setFlow(steps) {
+        if (this._running) {
+            throw new Error('Cannot set the GeneratorFixture flow once the fixture has begun iterating');
+        }
+        this._steps = steps;
+        return this;
     }
 
     forwardTo(target, value, throws) {
         this._checkIfRunnable();
-        const targetIndex = typeof target === 'string' ? this.findStepIndexByName(target) : target;
+        const targetIndex = typeof target === 'string' ? this._findStepIndexByName(target) : target;
 
         for (let i = this._currentIndex; i < targetIndex; i += 1) {
             const step = this._steps[this._currentIndex - 1] || {};
@@ -31,18 +33,20 @@ export default class GeneratorFixture {
                 this._internalForwardOne(step.defaultValue || step.throws, !!step.throws);
             }
         }
+        return this;
     }
 
-    findStepIndexByName(name) {
-        return this._steps.indexOf(this.findStepByName(name)) + 2;
+    _findStepIndexByName(name) {
+        return this._steps.indexOf(this._findStepByName(name)) + 2;
     }
 
-    findStepByName(name) {
+    _findStepByName(name) {
         return this._steps.find(step => step.name === name);
     }
 
     next(value) {
         this._internalForwardOne(value);
+        return this;
     }
 
     beginIterating(...args) {
@@ -53,6 +57,7 @@ export default class GeneratorFixture {
         this._iterator = this._generator(...args);
         this._currentIndex = 0;
         this._internalForwardOne();
+        return this;
     }
 
     _checkIfRunnable() {

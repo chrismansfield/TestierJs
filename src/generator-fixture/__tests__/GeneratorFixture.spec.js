@@ -27,7 +27,7 @@ describe('GeneratorFixture', () => {
         });
 
         it('should throw an error if trying to move the generator without starting', () => {
-            const sut = new GeneratorFixture();
+            const sut = new GeneratorFixture(generator);
 
             expect(() => sut.forwardTo(2)).toThrow();
         });
@@ -292,6 +292,32 @@ describe('GeneratorFixture', () => {
             sut.forwardTo('afterError');
 
             expect(caughtError).toBe('second-error');
+        });
+    });
+
+    describe('chaining', () => {
+        const generator = function* generator(arg) {
+            yield arg;
+            yield 'more stuff';
+            yield 'yup';
+            yield 'end';
+        };
+
+        it('should allow chaining of all public methods', () => {
+            const sut = new GeneratorFixture();
+
+            sut.setGenerator(generator)
+                .setFlow([
+                    { name: 'afterFirst' },
+                    { name: 'afterMoreStuff' },
+                    { name: 'afterYup' },
+                ])
+                .beginIterating()
+                .forwardTo('afterFirst')
+                .next()
+                .next();
+
+            expect(sut.value).toBe('end');
         });
     });
 });
