@@ -2,7 +2,7 @@
   "name": "testier",
   "version": "0.0.1",
   "description": "Making your tests testier!",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "jest",
     "test-watch": "jest --watch",
@@ -20,6 +20,9 @@
   },
   "author": "Christoffer Mansfield",
   "license": "ISC",
+  "files": [
+    "**/dist/*"
+  ],
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",

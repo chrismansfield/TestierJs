@@ -3,7 +3,7 @@ const babel = require('gulp-babel');
 const del = require('del');
 
 gulp.task('build', ['clean-dist'], () =>
-    gulp.src(['src/**/*.js', '!src/**/__tests__/*'])
+    gulp.src(['index.js', 'src/**/*.js', '!src/**/__tests__/*'])
         .pipe(babel())
         .pipe(gulp.dest('./dist')));
 
