@@ -5,13 +5,6 @@ module.exports = {
         'browser': false,
         'es6': true,
     },
-    'settings': {
-        'import/resolver': {
-            'eslint-import-resolver-webpack': {
-                config: 'webpack.config.js'
-            }
-        }
-    },
     'rules': {
         indent: ['error', 4, {
             SwitchCase: 1,
@@ -50,16 +43,7 @@ module.exports = {
             {
                 'functions': false
             }
-        ],
-        'import/no-unresolved': [
-            'error',
-            {
-                'ignore': [
-                    'app-config.json'
-                ]
-            }
-        ],
-        'import/extensions': 'off'
+        ],        
     },
     'overrides': [
         {
