@@ -9,7 +9,8 @@
     "lint-fix-all": "eslint --fix \"src/**/*.js\" \"tests/**/*.js\"",
     "precommit": "lint-staged",
     "prepush": "jest",
-    "build": "gulp build"
+    "build": "gulp build",
+    "autofix": "onchange **/*.js -- eslint {{changed}} --fix"
   },
   "lint-staged": {
     "*.js": [
@@ -31,6 +32,7 @@
     "husky": "^0.14.3",
     "jest": "^21.0.0",
     "jest-babel": "^1.0.1",
-    "lint-staged": "^4.2.3"
+    "lint-staged": "^4.2.3",
+    "onchange": "^3.2.1"
   }
 }
