@@ -1,11 +1,14 @@
 {
     "presets": [
         [
-            "es2015",
+            "env",
             {
-                "modules": false
+                "targets":{
+                    "node": "6.10"
+                }
             }
-        ]
+        ],
+        "stage-3"
     ],
     "env": {
         "test": {
