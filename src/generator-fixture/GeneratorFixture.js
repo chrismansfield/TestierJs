@@ -19,16 +19,16 @@ export default class GeneratorFixture {
         this._generator = generator;
     }
 
-    forwardTo(target, value) {
+    forwardTo(target, value, throws) {
         this._checkIfRunnable();
         const targetIndex = typeof target === 'string' ? this.findStepIndexByName(target) : target;
 
         for (let i = this._currentIndex; i < targetIndex; i += 1) {
             const step = this._steps[this._currentIndex - 1] || {};
             if (this._currentIndex === targetIndex - 1) {
-                this._internalForwardOne(value || step.defaultValue);
+                this._internalForwardOne(value || step.defaultValue || step.throws, throws || !!step.throws);
             } else {
-                this._internalForwardOne(step.defaultValue);
+                this._internalForwardOne(step.defaultValue || step.throws, !!step.throws);
             }
         }
     }
@@ -45,12 +45,12 @@ export default class GeneratorFixture {
         this._internalForwardOne(value);
     }
 
-    beginIterating() {
+    beginIterating(...args) {
         if (!this._generator) {
             throw new Error('Cannot begin iterating without a generator function. Provide one via the constructor or the setGenerator method');
         }
         this._running = true;
-        this._iterator = this._generator();
+        this._iterator = this._generator(...args);
         this._currentIndex = 0;
         this._internalForwardOne();
     }
@@ -64,10 +64,15 @@ export default class GeneratorFixture {
         }
     }
 
-    _internalForwardOne(value) {
+    _internalForwardOne(value, throws) {
         this._checkIfRunnable();
 
-        const step = this._iterator.next(value);
+        let step;
+        if (throws) {
+            step = this._iterator.throw(value);
+        } else {
+            step = this._iterator.next(value);
+        }
         this._currentIndex += 1;
         this.value = step.value;
         this.done = step.done;

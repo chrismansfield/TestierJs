@@ -227,4 +227,71 @@ describe('GeneratorFixture', () => {
             expect(sut.value).toBe('provided value');
         });
     });
+
+    describe('Passing value to generator', () => {
+        const generator = function* generator(...args) {
+            yield args;
+        };
+
+        it('should pass any arguments from beginIterating to the generator', () => {
+            const sut = new GeneratorFixture(generator);
+
+            sut.beginIterating('a string', 1337);
+
+            expect(sut.value).toEqual(['a string', 1337]);
+        });
+    });
+
+    describe('throwing exceptions', () => {
+        let caughtError;
+        const generator = function* generator() {
+            try {
+                yield 'first';
+                yield 'second';
+            } catch (e) {
+                caughtError = e;
+                yield e;
+            }
+            yield 'end';
+        };
+
+        afterEach(() => {
+            caughtError = null;
+        });
+
+        it('should throw the provided value if the throw flag is set', () => {
+            const sut = new GeneratorFixture(generator);
+            sut.beginIterating();
+
+            sut.forwardTo(2, 'error', true);
+
+            expect(sut.value).toBe('error');
+        });
+
+        it('should throw if the default flow is set to throw and no value is provided', () => {
+            const sut = new GeneratorFixture(generator);
+            sut.setFlow([
+                { name: 'afterFirst', throws: 'mega-error' },
+            ]);
+            sut.beginIterating();
+
+            sut.forwardTo('afterFirst');
+
+            expect(sut.value).toBe('mega-error');
+        });
+
+        it('should throw when passing over a step with default throws', () => {
+            const sut = new GeneratorFixture(generator);
+            sut.setFlow([
+                { name: 'afterFirst' },
+                { name: 'afterSecond', throws: 'second-error' },
+                { name: 'afterError' },
+            ]);
+            sut.beginIterating();
+
+            sut.forwardTo('afterError');
+
+            expect(caughtError).toBe('second-error');
+        });
+    });
 });
