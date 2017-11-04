@@ -1,7 +1,8 @@
+import recordError from '../../record';
 import sut from '../forAll';
 
 describe('forAll', () => {
-    [undefined, null, []].forEach((value) => {
+    [undefined, null, [], 1, ''].forEach((value) => {
         it(`should not call the inner function for value ${value && '[]'}`, () => {
             const innerFunction = jest.fn();
 
@@ -20,7 +21,9 @@ describe('forAll', () => {
         expect(invocations).toEqual(values);
     });
 
-    it('should not attempt invoking the inner function if it is not a function', () => {
-        expect(() => sut(['anything'], 'not a function')).not.toThrow();
+    it('Should throw a clear error if the invocation is not a function', () => {
+        const actual = recordError(() => sut(['anything'], 'not a function'));
+
+        expect(actual).toBeInstanceOf(TypeError);
     });
 });

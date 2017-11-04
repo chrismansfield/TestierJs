@@ -1,3 +1,4 @@
+import recordError from '../../record';
 import GeneratorFixture from '../GeneratorFixture';
 
 describe('GeneratorFixture', () => {
@@ -9,7 +10,9 @@ describe('GeneratorFixture', () => {
             sut.setGenerator(generator);
             sut.beginIterating();
 
-            expect(() => sut.setFlow()).toThrow();
+            const actual = recordError(() => sut.setFlow());
+
+            expect(actual).toBeInstanceOf(Error);
         });
 
         it('should throw an error if trying to set generator after iteration has begun', () => {
@@ -17,19 +20,25 @@ describe('GeneratorFixture', () => {
             sut.setGenerator(generator);
             sut.beginIterating();
 
-            expect(() => sut.setGenerator()).toThrow();
+            const actual = recordError(() => sut.setGenerator());
+
+            expect(actual).toBeInstanceOf(Error);
         });
 
         it('should throw an error if trying to start iterating without setting a generator', () => {
             const sut = new GeneratorFixture();
 
-            expect(() => sut.beginIterating()).toThrow();
+            const actual = recordError(() => sut.beginIterating());
+
+            expect(actual).toBeInstanceOf(Error);
         });
 
         it('should throw an error if trying to move the generator without starting', () => {
             const sut = new GeneratorFixture(generator);
 
-            expect(() => sut.forwardTo(2)).toThrow();
+            const actual = recordError(() => sut.forwardTo(2));
+
+            expect(actual).toBeInstanceOf(Error);
         });
     });
 
