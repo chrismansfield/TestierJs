@@ -302,6 +302,15 @@ describe('GeneratorFixture', () => {
 
             expect(caughtError).toBe('second-error');
         });
+
+        it('should throw on next when throws flag is true', () => {
+            const sut = new GeneratorFixture(generator);
+            sut.beginIterating();
+
+            sut.next('next-error', true);
+
+            expect(sut.value).toBe('next-error');
+        });
     });
 
     describe('chaining', () => {
