@@ -16,7 +16,7 @@
 export default class GeneratorFixture {
 
     /**
-     * Creates a new instance of the GeneratorFicture
+     * Creates a new instance of the GeneratorFixture
      * @param {Generator} generator The generator system under test
      */
     constructor(generator) {
