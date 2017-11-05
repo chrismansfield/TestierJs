@@ -7,6 +7,10 @@ const { hasOwnProperty } = Object.prototype;
  */
 export default class Builder {
 
+    /**
+     * Creates a new instance of the builder, optionally providing inital properties with default values
+     * @param {object} [initialProps] Any initial properties and default values to initialize the builder with
+     */
     constructor(initialProps) {
         Object.assign(this, initialProps);
     }
@@ -39,8 +43,8 @@ export default class Builder {
     }
 
     /**
-     * Creates a new object based on the properties of the builder. The object will be a simple object literal
-     * containing all properties from the builder, with prefixed underscores removed.
+     * Creates a new object based on the properties of the builder.
+     * The object will be containing all properties from the builder, with prefixed underscores removed.
      * @returns {object} A new object with the builder's properties mapped
      */
     build() {
