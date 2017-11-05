@@ -7,6 +7,10 @@ const { hasOwnProperty } = Object.prototype;
  */
 export default class Builder {
 
+    constructor(initialProps) {
+        Object.assign(this, initialProps);
+    }
+
     /**
      * Merges the values of the provided object into the builder. Only already defined properties are merged.
      * Matches builder properties by name, and then by name prefixed by an underscore.

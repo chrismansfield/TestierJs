@@ -22,7 +22,21 @@ class TestBuilder extends Builder {
 
 }
 
-describe('Builder.with', () => {
+describe('Builder', () => {
+    describe('constructor', () => {
+        it('should initialize any properties provided', () => {
+            const props = {
+                prop1: 1,
+                prop2: 'dummy',
+            };
+
+            const sut = new Builder(props);
+            const actual = sut.build();
+
+            expect(actual).toEqual(props);
+        });
+    });
+
     describe('with()', () => {
         it('should set values of properties with matching names', () => {
             const sut = new TestBuilder({
