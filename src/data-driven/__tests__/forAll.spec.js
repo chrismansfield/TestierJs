@@ -1,4 +1,4 @@
-import recordError from '../../record';
+import { recordError } from '../../record';
 import sut from '../forAll';
 
 describe('forAll', () => {

@@ -1,3 +1,4 @@
 import recordError from './recordError';
+import recordErrorAsync from './recordErrorAsync';
 
-export default recordError;
+export { recordError, recordErrorAsync };

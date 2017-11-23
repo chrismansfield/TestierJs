@@ -1,5 +1,5 @@
 import forAll from '../../data-driven';
-import recordError from '../../record';
+import { recordError } from '../../record';
 import AutoBuilder from '../AutoBuilder';
 
 describe('AutoBuilder', () => {
