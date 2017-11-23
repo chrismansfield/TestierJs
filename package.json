@@ -10,7 +10,7 @@
     "precommit": "lint-staged",
     "prepush": "jest",
     "build": "gulp build",
-    "autofix": "onchange **/*.js -- eslint {{changed}} --fix"
+    "autofix": "onchange '**/*.js' -- eslint {{changed}} --fix"
   },
   "lint-staged": {
     "*.js": [
