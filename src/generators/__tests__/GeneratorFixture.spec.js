@@ -1,4 +1,4 @@
-import recordError from '../../record';
+import { recordError } from '../../record';
 import GeneratorFixture from '../GeneratorFixture';
 
 describe('GeneratorFixture', () => {
