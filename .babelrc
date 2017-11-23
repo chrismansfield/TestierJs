@@ -12,6 +12,17 @@
     ],
     "env": {
         "test": {
+            "presets": [
+                [
+                    "env",
+                    {
+                        "targets":{
+                            "node": "current"
+                        }
+                    }
+                ],
+                "stage-3"
+            ],
             "plugins": [
                 "transform-es2015-modules-commonjs"
             ]
