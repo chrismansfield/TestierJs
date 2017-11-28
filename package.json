@@ -6,11 +6,13 @@
   "scripts": {
     "test": "jest",
     "test-watch": "jest --watch",
+    "lint": "eslint \"src/**/*.js\" \"tests/**/*.js\"",
     "lint-fix-all": "eslint --fix \"src/**/*.js\" \"tests/**/*.js\"",
     "precommit": "lint-staged",
     "prepush": "jest",
     "build": "gulp build",
-    "autofix": "onchange '**/*.js' -- eslint {{changed}} --fix"
+    "autofix": "onchange '**/*.js' -- eslint {{changed}} --fix",
+    "prepublishOnly": "yarn lint && yarn test && yarn build"
   },
   "lint-staged": {
     "*.js": [
