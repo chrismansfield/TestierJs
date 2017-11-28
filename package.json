@@ -1,6 +1,6 @@
 {
   "name": "testier",
-  "version": "1.0.0-alpha1",
+  "version": "1.0.0-alpha2",
   "description": "Making your tests testier!",
   "main": "dist/index.js",
   "repository": {
