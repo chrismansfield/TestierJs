@@ -3,6 +3,12 @@
   "version": "1.0.0-alpha1",
   "description": "Making your tests testier!",
   "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chrismansfield/TestierJs.git"
+  },
+  "author": "Christoffer Mansfield",
+  "license": "ISC",
   "scripts": {
     "test": "jest",
     "test-watch": "jest --watch",
@@ -19,9 +25,7 @@
       "eslint --fix",
       "git add"
     ]
-  },
-  "author": "Christoffer Mansfield",
-  "license": "ISC",
+  },  
   "files": [
     "**/dist/*"
   ],
