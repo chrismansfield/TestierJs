@@ -1,37 +1,32 @@
 
+const stringConverters = new Map([
+    ['undefined', () => 'undefined'],
+    ['number', value => value],
+    ['boolean', value => value],
+    ['string', value => `'${value}'`],
+    ['symbol', value => value.toString()],
+    ['function', value => (value.name ? `function ${value.name}()` : 'function()')],
+    ['object', value => stringFromObject(value)],
+]);
 
 export default function p(strings, ...values) {
-    let prettyString = '';
-    for (let i = 0; i < strings.length; i += 1) {
-        prettyString = prettyString.concat(strings[i], values.length > i ? getValue(values[i]) : '');
-    }
-    return prettyString;
+    return strings.reduce(
+        (result, string, i) =>
+            result.concat(string, values.length > i
+                ? stringConverters.get(typeof (values[i]))(values[i])
+                : ''),
+        '',
+    );
 }
 
-function getValue(value) {
-    switch (typeof (value)) {
-        case 'undefined':
-            return 'undefined';
-        case 'number':
-        case 'boolean':
-            return value;
-        case 'string':
-            return `'${value}'`;
-        case 'symbol':
-            return value.toString();
-        case 'function':
-            return value.name ? `function ${value.name}()` : 'function()';
-        case 'object':
-            if (value === null) {
-                return 'null';
-            }
-            if (Array.isArray(value)) {
-                return getArrayValue(value);
-            }
-            return getObjectValue(value);
-
-        default: return '';
+function stringFromObject(object) {
+    if (object === null) {
+        return 'null';
     }
+    if (Array.isArray(object)) {
+        return getArrayValue(object);
+    }
+    return getObjectValue(object);
 }
 
 function getArrayValue(array) {
