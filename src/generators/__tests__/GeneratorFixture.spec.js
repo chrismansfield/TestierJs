@@ -193,6 +193,17 @@ describe('GeneratorFixture', () => {
             expect(sut.value).toBe('default second');
         });
 
+        it('should not use default value if any value is passed in', () => {
+            const sut = new GeneratorFixture();
+            sut.setGenerator(generator);
+            sut.setFlow([{ name: 'second', defaultValue: 'default second' }, { name: 'third' }]);
+
+            sut.beginIterating();
+            sut.forwardTo('second', undefined);
+
+            expect(sut.value).toBe(undefined);
+        });
+
         it('should use default values from flow steps if defined even when target is further ahead', () => {
             const sut = new GeneratorFixture();
             sut.setGenerator(generator);

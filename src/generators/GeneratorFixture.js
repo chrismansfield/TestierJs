@@ -120,7 +120,8 @@ export default class GeneratorFixture {
         for (let i = this._currentIndex; i < targetIndex; i += 1) {
             const step = this._steps[this._currentIndex - 1] || {};
             if (this._currentIndex === targetIndex - 1) {
-                this._internalForwardOne(value || step.defaultValue || step.throws, throws || !!step.throws);
+                const actualValue = arguments.length > 1 ? value : step.defaultValue || step.throws;
+                this._internalForwardOne(actualValue, throws || !!step.throws);
             } else {
                 this._internalForwardOne(step.defaultValue || step.throws, !!step.throws);
             }
